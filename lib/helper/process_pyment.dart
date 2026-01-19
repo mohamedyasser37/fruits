@@ -7,7 +7,7 @@ import 'package:fruits/views/shipping/add_order_cubit/add_order_cubit.dart';
 import 'package:fruits/views/shipping/paypal_payment_entity/paypal_payment_entity.dart';
 import 'package:fruits/views/shipping/shipping%20_entites/order_entity.dart';
 
-void processPayment(BuildContext context) {
+void processPaypalPayment(BuildContext context) {
   var orderEntity = context.read<OrderEntity>();
   PaypalPaymentEntity paypalPaymentEntity = PaypalPaymentEntity.fromEntity(
     orderEntity,

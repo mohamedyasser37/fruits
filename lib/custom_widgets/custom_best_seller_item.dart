@@ -54,12 +54,27 @@ class CustomBestSellerItem extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(16),
-                          child: product.imageUrl != null
+                          child:
+
+                          product.imageUrl != null
                               ? Image.network(
-                                  product.imageUrl!,
-                                  fit: BoxFit.contain,
-                                )
-                              : CircleAvatar(
+                            product.imageUrl!,
+                            fit: BoxFit.contain,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.primary,
+                                ),
+                              );
+                            },
+                            errorBuilder: (context, error, stackTrace) {
+                              return Icon(Icons.error, size: 40);
+                            },
+                          )
+
+                          : CircleAvatar(
                                   backgroundColor: Colors.transparent,
                                   maxRadius: 20,
                                   child: CircularProgressIndicator(

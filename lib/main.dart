@@ -3,6 +3,7 @@
   import 'package:flutter/material.dart';
   import 'package:flutter_bloc/flutter_bloc.dart';
   import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
   import 'package:fruits/auth/cubit/signup_cubit.dart';
   import 'package:fruits/auth/domain/repos/auth_repo.dart';
   import 'package:fruits/firebase_options.dart';
@@ -13,6 +14,7 @@ import 'package:fruits/helper/get_user_data.dart';
   import 'package:fruits/helper/onGenerateRouets.dart';
   import 'package:fruits/helper/shared_prefrence.dart';
   import 'package:fruits/splash/splash_view_body.dart' show SplashViewBody;
+import 'package:fruits/stripe/api_keys.dart';
   import 'package:fruits/views/cart/cubit/cart_cubit.dart';
   import 'package:fruits/views/home/favourits_cubit/favourites_cubit.dart';
 import 'package:fruits/views/home/notification_cubit/notifications_cubit.dart';
@@ -20,7 +22,7 @@ import 'package:fruits/views/home/notification_repo.dart';
 
   void main() async {
     WidgetsFlutterBinding.ensureInitialized();
-
+    Stripe.publishableKey =ApiKeys.stripePublishableKey;
     await Prefs.init();
 
     await Firebase.initializeApp(

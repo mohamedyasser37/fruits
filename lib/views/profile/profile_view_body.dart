@@ -70,7 +70,6 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // عنوان "حسابي"
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -82,7 +81,6 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 ),
               ],
             ),
-            // الصورة والاسم والايميل
             Container(
               padding: const EdgeInsets.all(16),
               child: Row(
@@ -172,11 +170,11 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
             ),
-            const CustomProfileLisTile(
-              leading: Icon(Icons.domain_verification_outlined),
-              title: 'طلباتي',
-              trailing: Icon(Icons.arrow_forward_ios),
-            ),
+            // const CustomProfileLisTile(
+            //   leading: Icon(Icons.domain_verification_outlined),
+            //   title: 'طلباتي',
+            //   trailing: Icon(Icons.arrow_forward_ios),
+            // ),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, PersonalFavourite.routeName);
@@ -187,29 +185,30 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
             ),
-            const CustomProfileLisTile(
+             CustomProfileLisTile(
               leading: Icon(Icons.notifications_none_outlined),
               title: 'الاشعارات',
               trailing: Switch(
-                activeTrackColor: Colors.grey,
                 value: true,
                 activeColor: AppColors.primary,
+                activeTrackColor: Colors.grey.shade300,
                 inactiveThumbColor: Colors.white,
-                inactiveTrackColor: Colors.grey,
-                onChanged: null,
+                inactiveTrackColor: Colors.grey.shade300,
+                onChanged: (value) {
+                },
               ),
             ),
-            const CustomProfileLisTile(
-              leading: Icon(Icons.language_outlined),
-              title: 'اللغة',
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('العربية', style: TextStyles.regular16),
-                  Icon(Icons.arrow_forward_ios),
-                ],
-              ),
-            ),
+            // const CustomProfileLisTile(
+            //   leading: Icon(Icons.language_outlined),
+            //   title: 'اللغة',
+            //   trailing: Row(
+            //     mainAxisSize: MainAxisSize.min,
+            //     children: [
+            //       Text('العربية', style: TextStyles.regular16),
+            //       Icon(Icons.arrow_forward_ios),
+            //     ],
+            //   ),
+            // ),
             BlocBuilder<CartCubit, CartState>(
               builder: (context, state) {
                 final cubit = context.read<CartCubit>();

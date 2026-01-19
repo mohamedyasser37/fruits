@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fruits/core/entities/product_entity.dart';
 import 'package:fruits/helper/app_colors.dart';
 import 'package:fruits/helper/app_text_styles.dart';
 import 'package:fruits/views/cart/cubit/cart_cubit.dart';
 
 class FeaturedItem extends StatelessWidget {
-  const FeaturedItem({super.key, });
+
+   FeaturedItem({super.key, required this.imageUrl});
+final String imageUrl;
+
 
 
   @override
   Widget build(BuildContext context) {
+
+
+
     var itemWidth = MediaQuery.of(context).size.width - 48;
 
     return ClipRRect(
@@ -27,12 +32,11 @@ class FeaturedItem extends StatelessWidget {
                 top: 0,
                 bottom: 0,
                 right: itemWidth * 0.5,
-                child: SvgPicture.asset(
-                  'assets/images/page_view_item1_image.svg',
-                  fit: BoxFit.fill,
+                child: Image.asset(
+                  imageUrl,
+                  fit: BoxFit.contain,
                 ),
               ),
-
               Positioned(
                 left: itemWidth * 0.5,
                 right: 0,
@@ -42,11 +46,10 @@ class FeaturedItem extends StatelessWidget {
                   children: [
                     Positioned.fill(
                       child: SvgPicture.asset(
-                        'assets/images/featured_item_background.svg', // من الكود الأول
+                        'assets/images/featured_item_background.svg',
                         fit: BoxFit.cover,
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 18,
@@ -64,7 +67,9 @@ class FeaturedItem extends StatelessWidget {
                                 Text(
                                   'عروض العيد',
                                   style: TextStyles.regular13.copyWith(
-                                    color: context.watch<CartCubit>().isDarkMode? AppColors.mainBlack: AppColors.mainWhite,
+                                    color: context.watch<CartCubit>().isDarkMode
+                                        ? AppColors.mainBlack
+                                        : AppColors.mainWhite,
                                   ),
                                 ),
                                 const SizedBox(height: 10),

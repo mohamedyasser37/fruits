@@ -6,6 +6,8 @@ import 'package:fruits/helper/app_colors.dart';
 import 'package:fruits/helper/get_it.dart';
 import 'package:fruits/helper/get_user_data.dart';
 import 'package:fruits/helper/show_scaffoldBar.dart';
+import 'package:fruits/stripe/manger/payment_cubit.dart';
+import 'package:fruits/stripe/repos/payment_repo_impl.dart';
 import 'package:fruits/views/cart/cubit/cart_cubit.dart';
 import 'package:fruits/views/shipping/add_order_cubit/add_order_cubit.dart';
 import 'package:fruits/views/shipping/repos/orders_repo/orders_repo.dart';
@@ -22,9 +24,15 @@ class ShippingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AddOrderCubit(getIt<OrdersRepo>()),
+    return MultiBlocProvider(
 
+      providers: [
+
+        BlocProvider(create: (context) => AddOrderCubit(getIt<OrdersRepo>()),),
+        BlocProvider(create: (context) => PaymentCubit(
+          PaymentRepoImpl()
+        ))
+    ],
       child: Scaffold(
           backgroundColor: context.watch<CartCubit>().isDarkMode? AppColors.mainBlack: AppColors.mainWhite,
           body: Provider.value(
