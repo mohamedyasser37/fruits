@@ -9,6 +9,7 @@ import 'package:fruits/helper/app_colors.dart';
 import 'package:fruits/helper/app_text_styles.dart';
 import 'package:fruits/helper/get_user_data.dart';
 import 'package:fruits/views/cart/cubit/cart_cubit.dart';
+import 'package:fruits/views/profile/my_orders/myorders_view.dart';
 import 'package:fruits/views/profile/views/about_us_view.dart';
 import 'package:fruits/views/profile/views/personal_favourite.dart';
 import 'package:fruits/views/profile/views/personal_profile.dart';
@@ -170,11 +171,17 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
             ),
-            // const CustomProfileLisTile(
-            //   leading: Icon(Icons.domain_verification_outlined),
-            //   title: 'طلباتي',
-            //   trailing: Icon(Icons.arrow_forward_ios),
-            // ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, MyOrdersView.routeName);
+
+              },
+              child: const CustomProfileLisTile(
+                leading: Icon(Icons.domain_verification_outlined),
+                title: 'طلباتي',
+                trailing: Icon(Icons.arrow_forward_ios),
+              ),
+            ),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, PersonalFavourite.routeName);

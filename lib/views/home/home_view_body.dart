@@ -25,8 +25,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   @override
   void initState() {
     context.read<GetProductsCubit>().getProducts();
-
-    super.initState();
+super.initState();
   }
 
   @override

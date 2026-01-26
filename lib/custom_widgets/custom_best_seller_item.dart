@@ -27,6 +27,7 @@ class CustomBestSellerItem extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (_) => ProductDetailsView(product: product),
+
             ),
           );
         },

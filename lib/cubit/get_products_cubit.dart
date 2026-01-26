@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:fruits/core/entities/product_entity.dart';
 import 'package:fruits/core/models/product_model.dart';
 import 'package:fruits/helper/app_colors.dart';
 import 'package:fruits/helper/shared_prefrence.dart';
@@ -15,6 +14,7 @@ class GetProductsCubit extends Cubit<GetProductsState> {
   int length = 0;
 
   Future<void> getProducts() async {
+
     emit(GetProductsLoading());
     final result = await productRepo.getProducts();
     result.fold(

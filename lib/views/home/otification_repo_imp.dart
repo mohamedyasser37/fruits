@@ -6,20 +6,44 @@ class NotificationRepoImpl implements NotificationRepo {
 
   NotificationRepoImpl(this.firestore);
 
+
+
+  @override
+  Stream<List<String>> getNotificationTitlesStream() {
+    return firestore
+        .collection('notifications')
+        .orderBy('createdAt', descending: true) // الترتيب من الأحدث للأقدم
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs
+          .map((doc) => doc.data()['title'] as String)
+          .toList(),
+    );
+  }
+
   @override
   Future<List<String>> getNotificationTitles() async {
-    final snapshot = await firestore.collection('notifications').get();
+    final snapshot = await firestore
+        .collection('notifications')
+        .orderBy('createdAt', descending: true) // الترتيب هنا أيضاً
+        .get();
+
     return snapshot.docs
         .map((doc) => doc.data()['title'] as String)
         .toList();
   }
 
   @override
-  Stream<List<String>> getNotificationTitlesStream() {
-    return firestore.collection('notifications').snapshots().map(
-          (snapshot) => snapshot.docs
-          .map((doc) => doc.data()['title'] as String)
-          .toList(),
-    );
+  Future<void> deleteNotification(String title) async {
+    var snapshot = await firestore
+        .collection('notifications')
+        .where('title', isEqualTo: title)
+        .get();
+
+    for (var doc in snapshot.docs) {
+      await doc.reference.delete();
+    }
   }
+
+
 }

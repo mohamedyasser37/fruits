@@ -35,6 +35,10 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
             children: [
               SizedBox(height: 24),
               CustomTextFormField(
+                style: TextStyles.semiBold16.copyWith(
+                  color:
+                  AppColors.mainBlack,
+                ),
                 controller: nameController,
                 hintText: 'الاسم كامل',
                 suffixIcon: const Icon(Icons.person),
@@ -42,6 +46,10 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               ),
               SizedBox(height: 16),
               CustomTextFormField(
+                style: TextStyles.semiBold16.copyWith(
+                  color:
+                  AppColors.mainBlack,
+                ),
                 controller: emailController,
                 hintText: 'البريد الإلكتروني',
                 suffixIcon: const Icon(Icons.email),

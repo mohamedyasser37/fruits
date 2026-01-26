@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:fruits/auth/services/data_service.dart';
 import 'package:fruits/core/entities/product_entity.dart';
+import 'package:fruits/core/entities/review_entity.dart';
 import 'package:fruits/core/models/product_model.dart';
 import 'package:fruits/errors/faliures.dart';
 import 'package:fruits/helper/end_points.dart';
@@ -46,4 +48,61 @@ class ProductRepoImp implements ProductRepo {
       return Left(ServerFailure('Failed to get products'));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> addReview({
+    required String productId,
+    required ReviewEntity review,
+  }) async {
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection(EndPoints.productsEndPoint)
+          .doc(productId);
+
+      await FirebaseFirestore.instance.runTransaction((transaction) async {
+        final snapshot = await transaction.get(docRef);
+
+        if (!snapshot.exists) {
+          throw Exception("Product not found");
+        }
+
+        final data = snapshot.data()!;
+        final List reviews = data['reviews'] ?? [];
+
+        reviews.add(review.toJson());
+
+        final ratingCount = (data['ratingCount'] ?? 0) + 1;
+        final totalRating = (data['avgRating'] ?? 0) * (data['ratingCount'] ?? 0);
+        final avgRating = (totalRating + review.ratting) / ratingCount;
+
+        transaction.update(docRef, {
+          'reviews': reviews,
+          'ratingCount': ratingCount,
+          'avgRating': avgRating,
+        });
+      });
+
+      return const Right(null);
+    } catch (e) {
+      return Left(ServerFailure("Failed to add review"));
+    }
+  }
+  @override
+  Future<Either<Failure, void>> increaseSellingCount(String productId) async {
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection(EndPoints.productsEndPoint)
+          .doc(productId);
+
+      await docRef.update({
+        'sellingCount': FieldValue.increment(1),
+      });
+
+      return const Right(null);
+    } catch (e) {
+      return Left(ServerFailure("Failed to increase selling count"));
+    }
+  }
+
+
 }

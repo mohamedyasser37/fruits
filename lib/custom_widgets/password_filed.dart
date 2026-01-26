@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits/custom_widgets/custom_text_form_field.dart';
+import 'package:fruits/helper/app_colors.dart';
+import 'package:fruits/helper/app_text_styles.dart';
 
 class PasswordFiled extends StatefulWidget {
   const PasswordFiled({
@@ -21,6 +23,10 @@ class _PasswordFiledState extends State<PasswordFiled> {
       controller: widget.passwordController,
       isObscure: isObscure,
       hintText: 'كلمة المرور',
+      style: TextStyles.semiBold16.copyWith(
+        color:
+        AppColors.mainBlack,
+      ),
       suffixIcon: GestureDetector(
           onTap: () {
             setState(() {

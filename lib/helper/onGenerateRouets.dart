@@ -1,15 +1,19 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits/auth/signin/signin_view.dart';
 import 'package:fruits/auth/signup/sign_up.dart';
 import 'package:fruits/auth/signup/terms_view.dart';
 import 'package:fruits/cart_entities/cart_list_entity.dart';
+import 'package:fruits/core/entities/product_entity.dart';
 import 'package:fruits/forget_password/forget_password.dart';
+import 'package:fruits/messages/test_firebase_notifications_view.dart';
 import 'package:fruits/onBoarding/on_boarding_view.dart';
 import 'package:fruits/splash/splash_view_body.dart';
 import 'package:fruits/views/home/notifications.dart';
 import 'package:fruits/views/home/search_view.dart';
 import 'package:fruits/views/main_view.dart';
-import 'package:fruits/views/products/product_review.dart';
+import 'package:fruits/views/products/reviews/product_review.dart';
+import 'package:fruits/views/profile/my_orders/myorders_view.dart';
 import 'package:fruits/views/profile/views/about_us_view.dart';
 import 'package:fruits/views/profile/views/personal_favourite.dart';
 import 'package:fruits/views/profile/views/personal_profile.dart';
@@ -19,6 +23,16 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case SplashViewBody.routeName:
       return MaterialPageRoute(builder: (_) => const SplashViewBody());
+      case MyOrdersView.routeName:
+      return MaterialPageRoute(builder: (_) => const MyOrdersView());
+
+
+    case TestFirebaseNotifications.routeName:
+      final args = settings.arguments as RemoteMessage;
+      return MaterialPageRoute(builder: (_) =>  TestFirebaseNotifications(
+        message: args,
+      ));
+
     case SignInView.routeName:
       return MaterialPageRoute(builder: (_) => const SignInView());
     case ShippingView.routeName:
@@ -29,7 +43,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case MainView.routeName:
       return MaterialPageRoute(builder: (_) => const MainView());
     case ProductReview.routeName:
-      return MaterialPageRoute(builder: (_) => const ProductReview());
+    // استلام الـ ProductEntity من الـ arguments
+      final product = settings.arguments as ProductEntity;
+      return MaterialPageRoute(
+        builder: (_) => ProductReview(productEntity: product),
+      );
+
+
     case SearchView.routeName:
       return MaterialPageRoute(builder: (_) => const SearchView());
     case NotificationsView.routeName:

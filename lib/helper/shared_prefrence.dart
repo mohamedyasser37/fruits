@@ -14,6 +14,13 @@ class Prefs {
   static getBool(String key) {
     return _instance.getBool(key) ?? false;
   }
+  static setInt(String key, int value) async {
+    await _instance.setInt(key, value);
+  }
+
+  static int getInt(String key) {
+    return _instance.getInt(key) ?? 0;
+  }
 
 
   static Future<void> saveTheme(bool isDark) async {

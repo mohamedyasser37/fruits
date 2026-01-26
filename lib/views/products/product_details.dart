@@ -7,7 +7,7 @@ import 'package:fruits/helper/app_colors.dart';
 import 'package:fruits/helper/app_text_styles.dart';
 import 'package:fruits/helper/show_scaffoldBar.dart';
 import 'package:fruits/views/cart/cubit/cart_cubit.dart';
-import 'package:fruits/views/products/product_review.dart';
+import 'package:fruits/views/products/reviews/product_review.dart';
 
 class ProductDetailsView extends StatelessWidget {
   final ProductModel product;
@@ -112,7 +112,11 @@ class ProductDetailsView extends StatelessWidget {
                       const SizedBox(width: 10),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, ProductReview.routeName);
+                          Navigator.pushNamed(
+                            context,
+                            ProductReview.routeName,
+                            arguments: product.toEntity(),
+                          );
                         },
                         child: Text(
                           'المراجعه',

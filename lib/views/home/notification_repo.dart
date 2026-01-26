@@ -6,4 +6,5 @@ abstract class NotificationRepo {
 
   /// Optional: stream for real-time updates
   Stream<List<String>> getNotificationTitlesStream();
+  Future<void> deleteNotification(String title);
 }

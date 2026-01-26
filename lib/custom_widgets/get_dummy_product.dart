@@ -7,7 +7,6 @@ ProductModel getDummyProduct() {
   
   return ProductModel(
     name: 'Apple',
-    code: '123',
     description: 'Fresh apple',
     price: 2.5,
     expirationsMonths: 6,
@@ -16,6 +15,8 @@ ProductModel getDummyProduct() {
     isOrganic: true,
     isFeatured: true,
     imageUrl: null, id: 'fsf',
+  sellingCount: 5, avgRating:
+    5, ratingCount: 5, reviews: [], code: '123',
   );
 }
 

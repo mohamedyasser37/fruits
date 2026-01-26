@@ -12,6 +12,7 @@ import 'package:fruits/custom_widgets/password_filed.dart';
 import 'package:fruits/forget_password/forget_password.dart';
 import 'package:fruits/helper/app_colors.dart';
 import 'package:fruits/helper/app_text_styles.dart';
+import 'package:fruits/views/cart/cubit/cart_cubit.dart';
 
 class SignInViewBody extends StatefulWidget {
   const SignInViewBody({super.key});
@@ -37,6 +38,10 @@ class _SignInViewBodyState extends State<SignInViewBody> {
             children: [
               SizedBox(height: 24),
               CustomTextFormField(
+                style: TextStyles.semiBold16.copyWith(
+                  color:
+                       AppColors.mainBlack,
+                ),
                 controller: emailController,
                 hintText: 'البريد الالكتروني',
                 suffixIcon: const Icon(Icons.email),
